@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Portal</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        :root {
+            --accent: #a03020;
+            --accent2: #402080;
+        }
+
+        body {
+            background-color: #080808;
+            color: #888888;
+            font-family: sans-serif;
+            font-size: 16px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        div.header {
+            background-color: var(--accent2);
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent2));
+            height: 10vh;
+            max-width: 100%;
+            width: 100vw;
+        }
+
+        div.headerContent {
+            padding: 32px 64px 32px 32px;
+            text-align: right;
+        }
+
+        div.message {
+            background-color: var(--accent);
+            border-radius: 8px;
+            color: #FFFFFF;
+            margin: 32px;
+            padding: 16px 32px 16px 32px;
+        }
+
+        div.section {
+            background-color: #111111;
+            border-radius: 8px;
+            margin: 32px;
+            padding: 32px 64px 32px 64px;
+        }
+
+        h1 {
+            color: var(--accent);
+            font-size: 32px;
+            font-weight: normal;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            color: #BBBBBB;
+            font-size: 24px;
+            font-weight: normal;
+            margin-bottom: 32px;
+            margin-top: 32px;
+        }
+
+        img {
+            max-width: 50vw;
+            max-height: 50vh;
+        }
+
+        code {
+            overflow-wrap: break-word;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #FFFFFF;
+        }
+
+        /* Form */
+        input[type=submit] {
+            background: #000000;
+            border-color: #888888;
+            border-radius: 8px;
+            border-style: solid;
+            border-width: 4px;
+            color: var(--accent);
+            font-size: 16px;
+            font-weight: bold;
+            margin: 16px;
+            padding: 16px 32px 16px 32px;
+        }
+
+        input[type=submit]:hover {
+            color: #FFFFFF;
+        }
+
+        input[type=text], input[type=file], textarea {
+            background: #000000;
+            border-color: #888888;
+            border-radius: 8px;
+            border-style: solid;
+            border-width: 4px;
+            color: #888888;
+            display: block;
+            font-size: 16px;
+            margin: 0px 0px 16px 0px;
+            padding: 16px;
+            width: 100%;
+        }
+
+        input[type=file]::file-selector-button {
+            background: #111111;
+            border-color: #888888;
+            border-radius: 8px;
+            border-style: solid;
+            border-width: 0px;
+            color: var(--accent);
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 16px;
+            padding: 8px 16px 8px 16px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+        }
+
+        div.log {
+            background: #000000;
+            border-radius: 8px;
+            font-family: monospace;
+            margin-top: 32px;
+            padding: 8px 16px 8px 16px;
+        }
+
+        div.message:empty {
+            display: none;
+        }
+
+        div.log:empty {
+            display: none;
+        }
+
+        /* Mobile */
+        @media (max-width : 800px) {
+            body {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header"></div>
+    <div class="main">
+        <div class="message">{{message}}</div>
+        <div class="section">
+            <form action="/portal/content" method="post" enctype="multipart/form-data">
+                <h1>Content</h1>
+                <h2>Files</h2>
+                <p>Select a zip file containing the content to serve.</p>
+                <input name="zip" type="file" />
+                <h2>Auth Key</h2>
+                <p>Provide the auth key used to authorize these changes.</p>
+                <input name="authKey" type="text" />
+                <input name="replace" type="submit" value="Replace" />
+                <input name="append" type="submit" value="Append" />
+            </form>
+        </div>
+        <div class="section">
+            <form action="/portal" method="post">
+                <h1>Log</h1>
+                <h2>Auth Key</h2>
+                <p>Provide the auth key used to authorize access.</p>
+                <input name="authKey" type="text" />
+                <input name="view" type="submit" value="View" />
+                <div class="log">{{log}}</div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
